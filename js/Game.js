@@ -32,4 +32,24 @@ class Game {
         // return phrase at phrases index of random number
         return this.phrases[randomPhraseIndex];
     }
+
+    // initialize game
+    startGame()
+    {
+        // select start screen and hide it
+        const startScreen = document.getElementById('overlay');
+        startScreen.style.display = 'none';
+
+        // call getRandomPhrase function
+        const newRandomPhrase = this.getRandomPhrase();
+
+        // define active phrase property of game class
+        this.activePhrase = newRandomPhrase;
+
+        // create new phrase class with random phrase
+        const phrase = new Phrase(newRandomPhrase);
+
+        // add phrase to display
+        phrase.addPhraseToDisplay();
+    }
 }
