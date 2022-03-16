@@ -52,4 +52,10 @@ class Game {
         // add phrase to display
         phrase.addPhraseToDisplay();
     }
+
+    // handles events on user activity
+    handleInteraction(letter)
+    {
+        Phrase.checkLetter(letter);
+    }
 }

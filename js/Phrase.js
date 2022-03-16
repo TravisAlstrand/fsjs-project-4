@@ -2,6 +2,9 @@
  * Project 4 - OOP Game App
  * Phrase.js */
 
+    // create variable for ul to append phrase
+    const phraseUL = document.getElementById('phrase').firstElementChild;
+
 // create the Phrase class
 class Phrase {
 
@@ -14,9 +17,6 @@ class Phrase {
 
     // function to display phrase on game screen
     addPhraseToDisplay() {
-
-        // create variable for ul to append phrase
-        const phraseUL = document.getElementById('phrase').firstElementChild;
 
         // create array of phrase's characters
         const charArray = this.phrase.split('');
@@ -40,5 +40,11 @@ class Phrase {
             // append li element to ul
             phraseUL.appendChild(li);
         });
+    }
+
+    // to check if clicked letter is in current phrase
+    checkLetter(letter)
+    {
+        console.log(`checkLetter recieved ${letter}`);
     }
 }
