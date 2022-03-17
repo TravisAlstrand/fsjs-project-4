@@ -39,8 +39,7 @@ class Game {
     // initialize game
     startGame()
     {
-        // select start screen and hide it
-        const startScreen = document.getElementById('overlay');
+        // hide start screen
         startScreen.style.display = 'none';
 
         // call getRandomPhrase function
@@ -57,29 +56,74 @@ class Game {
     }
 
     // handles events on user activity
-    handleInteraction(letter)
+    handleInteraction(btn)
     {
+        // disable clicked button
+        btn.disabled = true;
+
         // send clicked letter to checkLetter() to see if it matches phrase
-        let results = this.phraseObject.checkLetter(letter);
+        let results = this.phraseObject.checkLetter(btn.innerHTML);
 
         // if returned 'matched' variable is empty (no match)
         // call remove life function
         if (results === null) {
             this.removeLife();
+            btn.classList.add('wrong');
+        } else {
+            btn.classList.add('chosen');
         }
+
+        // check to see if player has won each guess
+        this.checkForWin();
     }
 
     removeLife()
     {
         // increment missed counter by 1
         this.missed++;
-        console.log(this.missed);
+
         // replace a heart image with an empty heart image
         hearts[this.missed - 1].src = '../images/lostHeart.png';
 
         // if player misses 5 times, call end game function
         if (this.missed === 5) {
-            // end game
+            this.endGame('lost');
+        }
+    }
+
+    checkForWin() {
+
+        // find all LIs with the 'show' class
+        const liCorrect = document.querySelectorAll('.show');
+
+        // find all phrase letters with 'letter' class
+        const phraseLetters = document.querySelectorAll('.letter');
+
+        // if all LIs in phrase have 'show' class call end game with 'won'
+        if (liCorrect.length === phraseLetters.length)
+        {
+            this.endGame('won');
+        } else {
+            return;
+        }
+    }
+
+    endGame(wonOrLost) {
+
+        // show start screen overlay
+        startScreen.style.display = 'inherit';
+
+        // if player lost, show lose screen
+        // if player won, show win screen
+        if (wonOrLost === 'lost')
+        {
+            startScreen.classList.remove('start');
+            startScreen.classList.add('lose');
+            winLoseH1.innerHTML = 'Bummer! You Lost!'
+        } else if (wonOrLost === 'won') {
+            startScreen.classList.remove('start');
+            startScreen.classList.add('win');
+            winLoseH1.innerHTML = 'Nice Job! You Won!';
         }
     }
 }
