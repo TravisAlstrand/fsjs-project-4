@@ -13,6 +13,8 @@ class Phrase {
 
         // sets the phrase property = to the phrase parameter converted to lower case
         this.phrase = phraseObject.phrase.toLowerCase();
+
+        this.letterLIs = [];
     }
 
     // function to display phrase on game screen
@@ -39,12 +41,26 @@ class Phrase {
     
             // append li element to ul
             phraseUL.appendChild(li);
+            this.letterLIs.push(li);
         });
     }
 
     // to check if clicked letter is in current phrase
     checkLetter(letter)
     {
-        console.log(`checkLetter recieved ${letter}`);
+        let matchFound = null;
+
+        // iterate through each phrase LI element
+        this.letterLIs.forEach(li => {
+
+            // if it's a match, show on game board
+            if (li.classList.contains(letter)) {
+                li.classList.remove('hide');
+                li.classList.add('show');
+                matchFound = letter;
+            }
+        });
+
+        return matchFound;
     }
 }

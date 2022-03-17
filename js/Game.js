@@ -7,6 +7,9 @@ class Game {
 
     constructor() {
 
+        // create empty phrase object variable
+        this.phraseObject = null;
+
         // used to track missed guess attempts
         this.missed = 0;
 
@@ -46,16 +49,37 @@ class Game {
         // define active phrase property of game class
         this.activePhrase = newRandomPhrase;
 
-        // create new phrase class with random phrase
-        const phrase = new Phrase(newRandomPhrase);
+        // define variable & create new phrase class with random phrase
+        this.phraseObject = new Phrase(newRandomPhrase);
 
         // add phrase to display
-        phrase.addPhraseToDisplay();
+        this.phraseObject.addPhraseToDisplay();
     }
 
     // handles events on user activity
     handleInteraction(letter)
     {
-        Phrase.checkLetter(letter);
+        // send clicked letter to checkLetter() to see if it matches phrase
+        let results = this.phraseObject.checkLetter(letter);
+
+        // if returned 'matched' variable is empty (no match)
+        // call remove life function
+        if (results === null) {
+            this.removeLife();
+        }
+    }
+
+    removeLife()
+    {
+        // increment missed counter by 1
+        this.missed++;
+        console.log(this.missed);
+        // replace a heart image with an empty heart image
+        hearts[this.missed - 1].src = '../images/lostHeart.png';
+
+        // if player misses 5 times, call end game function
+        if (this.missed === 5) {
+            // end game
+        }
     }
 }

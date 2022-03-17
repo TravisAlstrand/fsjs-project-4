@@ -4,7 +4,8 @@
 
 const startBtn = document.getElementById('btn__reset'); // start button selector
 const keysDiv = document.getElementById('qwerty'); // keyboard div selector
-
+const hearts = document.querySelectorAll('img[alt="Heart Icon"'); // array of hearts
+console.log(hearts);
 let game = null; // game variable
 
 startBtn.addEventListener('click', () => {
@@ -20,6 +21,13 @@ startBtn.addEventListener('click', () => {
 keysDiv.addEventListener('click', (e) => {
     if (e.target.classList.contains('key'))
     {
+        // call handle interaction function
         game.handleInteraction(e.target.innerHTML);
+
+        // add chosen class to button
+        e.target.className = 'chosen';
+
+        // disable button
+        e.target.disabled = true;
     }
 });
