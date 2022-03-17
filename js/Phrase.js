@@ -48,19 +48,25 @@ class Phrase {
     // to check if clicked letter is in current phrase
     checkLetter(letter)
     {
-        let matchFound = null;
+        let matchFound = [];
 
         // iterate through each phrase LI element
         this.letterLIs.forEach(li => {
 
-            // if it's a match, show on game board
+            // if it's a match, assign matchFound var the LI
             if (li.classList.contains(letter)) {
-                li.classList.remove('hide');
-                li.classList.add('show');
-                matchFound = letter;
+                matchFound.push(li);
             }
         });
 
         return matchFound;
+    }
+
+    // show correct guess on screen
+    showMatchedLetter(li) {
+        li.forEach(li => {
+            li.classList.remove('hide');
+            li.classList.add('show');
+        });
     }
 }

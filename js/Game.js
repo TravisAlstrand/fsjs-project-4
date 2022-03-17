@@ -65,16 +65,23 @@ class Game {
         let results = this.phraseObject.checkLetter(btn.innerHTML);
 
         // if returned 'matched' variable is empty (no match)
-        // call remove life function
-        if (results === null) {
+        // call remove life function & change button color
+        if (results.length === 0) {
             this.removeLife();
             btn.classList.add('wrong');
         } else {
+            // if results is an LI, change button color, call show matched letter
             btn.classList.add('chosen');
+            this.phraseObject.showMatchedLetter(results);
         }
 
         // check to see if player has won each guess
-        this.checkForWin();
+        let winResults = this.checkForWin();
+
+        // if player won, end game with 'won' parameter
+        if (winResults === true) {
+            this.endGame('won');
+        }
     }
 
     removeLife()
@@ -102,9 +109,9 @@ class Game {
         // if all LIs in phrase have 'show' class call end game with 'won'
         if (liCorrect.length === phraseLetters.length)
         {
-            this.endGame('won');
+            return true;
         } else {
-            return;
+            return null;
         }
     }
 
