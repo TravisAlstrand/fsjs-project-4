@@ -2,9 +2,6 @@
  * Project 4 - OOP Game App
  * Phrase.js */
 
-    // create variable for ul to append phrase
-    const phraseUL = document.getElementById('phrase').firstElementChild;
-
 // create the Phrase class
 class Phrase {
 

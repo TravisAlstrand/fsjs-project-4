@@ -56,22 +56,35 @@ class Game {
     }
 
     // handles events on user activity
-    handleInteraction(btn)
+    handleInteraction(letter)
     {
+        let clickedBtn; // empty variable for clicked button
+
+        // iterate through on screen keys
+        for (let i = 0; i < keyBtns.length; i++) {
+
+            // if key has same letter as 'letter'
+            if (keyBtns[i].innerHTML === letter) {
+
+                // assign clicked button var this on screen key
+                clickedBtn = keyBtns[i];
+            }
+        }
+
         // disable clicked button
-        btn.disabled = true;
+        clickedBtn.disabled = true;
 
         // send clicked letter to checkLetter() to see if it matches phrase
-        let results = this.phraseObject.checkLetter(btn.innerHTML);
+        let results = this.phraseObject.checkLetter(letter);
 
         // if returned 'matched' variable is empty (no match)
         // call remove life function & change button color
         if (results.length === 0) {
             this.removeLife();
-            btn.classList.add('wrong');
+            clickedBtn.classList.add('wrong');
         } else {
             // if results is an LI, change button color, call show matched letter
-            btn.classList.add('chosen');
+            clickedBtn.classList.add('chosen');
             this.phraseObject.showMatchedLetter(results);
         }
 
@@ -132,5 +145,29 @@ class Game {
             startScreen.classList.add('win');
             winLoseH1.innerHTML = 'Nice Job! You Won!';
         }
+    }
+
+    resetGame() {
+
+        // remove all phrase LI elements from UL
+        this.phraseObject.letterLIs.forEach(li => {
+            li.remove();
+        });
+
+        // remove chosen & wrong classes,
+        // add key class and enable every button
+        keyBtns.forEach(btn => {
+            btn.classList.remove('chosen', 'wrong');
+            btn.classList.add('key');
+            btn.disabled = false;
+        });
+
+        // refill all hearts
+        hearts.forEach(heart => {
+            heart.src = '../images/liveHeart.png';
+        });
+
+        // remove win or lose screen
+        startScreen.style.display = 'none';
     }
 }
