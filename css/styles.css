@@ -5,9 +5,9 @@
 
 :root {
   --color-win: #78CF82;
-  --color-lose: #D94545;
+  --color-lose: rgb(217, 69, 69);
   --color-start: #5b85b7;
-  --color-neutral: #445069;
+  --color-neutral: #575757;
   --color-neutral-light: #D2D2D2;
   --color-keys: #37474F;
   --color-keys-light: #E5E5E5;
@@ -28,6 +28,7 @@ body {
   flex-direction: column;
   display: flex;
   height: 100vh;
+  background-image: radial-gradient(circle, var(--color-neutral-light), var(--color-neutral), black);
 }
 
 li, ol, ul {
@@ -86,7 +87,8 @@ button {
 /* Title */
 
 .header {
-  color: #3a3f58;
+  color: var(--color-lose);
+  text-shadow: 2px 2px black;
 }
 
 
@@ -107,15 +109,16 @@ button {
   width: 15px;
 }
 
-
-
 .show {
   color: #fff;
-  background-color: #4ac0d5;
-  font-size: 20px;
+  text-shadow: 1px 1px black;
+  background-color: var(--color-win);
+  font-size: 30px;
+  font-weight: bold;
   height: 65px;
   width: 65px;
-  padding: 20px 1px 0 1px;
+  padding: 10px 1px 0 1px;
+  margin-top: 10px;
   margin-right: 2px;
   border-radius: 5px;
   -webkit-animation-duration: .5s;
@@ -131,14 +134,14 @@ button {
 }
 
 .chosen {
-  background: #3a3f58;
+  background: var(--color-win);
   border-radius: 5px;
   font-size: var(--font-size-medium);
   color: #FFFFFF;
 }
 
 .wrong {
-  background: #f7a964;
+  background: var(--color-lose);
   color: #FFFFFF;
 }
 
@@ -180,7 +183,7 @@ button {
 }
 
 .start {
-  background-color: #3a3f58;
+  background-image: radial-gradient(circle, black, var(--color-neutral), var(--color-neutral-light));
 }
 
 .start a {
@@ -188,7 +191,7 @@ button {
 }
 
 .win {
-  background-color: var(--color-win);
+  background-image: radial-gradient(circle, var(--color-win), var(--color-neutral-light));
 }
 
 .win a {
@@ -196,7 +199,7 @@ button {
 }
 
 .lose {
-  background-color: #f5785f;
+  background-image: radial-gradient(circle, var(--color-lose), var(--color-neutral-light));
 }
 
 .lose a {
