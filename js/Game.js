@@ -7,20 +7,17 @@ class Game {
 
     constructor() {
 
-        // create empty phrase object variable
-        this.phraseObject = null;
-
         // used to track missed guess attempts
         this.missed = 0;
 
         // array of phrases
         this.phrases = [
-            {phrase: 'Whats your favorite scary movie'},
-            {phrase: 'I want to play a game'},
-            {phrase: 'I see dead people'},
-            {phrase: 'Sometimes dead is better'},
-            {phrase: 'We all float down here'}
-        ];
+            new Phrase('Whats your favorite scary movie'),
+            new Phrase('I want to play a game'),
+            new Phrase('I see dead people'),
+            new Phrase('Sometimes dead is better'),
+            new Phrase('We all float down here')
+          ];
 
         // active phrase in game
         this.activePhrase = null;
@@ -48,11 +45,8 @@ class Game {
         // define active phrase property of game class
         this.activePhrase = newRandomPhrase;
 
-        // define variable & create new phrase class with random phrase
-        this.phraseObject = new Phrase(newRandomPhrase);
-
         // add phrase to display
-        this.phraseObject.addPhraseToDisplay();
+        this.activePhrase.addPhraseToDisplay();
     }
 
     // handles events on user activity
@@ -75,7 +69,7 @@ class Game {
         clickedBtn.disabled = true;
 
         // send clicked letter to checkLetter() to see if it matches phrase
-        let results = this.phraseObject.checkLetter(letter);
+        let results = this.activePhrase.checkLetter(letter);
 
         // if returned 'matched' variable is empty (no match)
         // call remove life function & change button color
@@ -85,7 +79,7 @@ class Game {
         } else {
             // if results is an LI, change button color, call show matched letter
             clickedBtn.classList.add('chosen');
-            this.phraseObject.showMatchedLetter(results);
+            this.activePhrase.showMatchedLetter(results);
         }
 
         // check to see if player has won each guess
@@ -93,7 +87,7 @@ class Game {
 
         // if player won, end game with 'won' parameter
         if (winResults === true) {
-            this.endGame('won');
+            this.gameOver('won');
         }
     }
 
@@ -107,7 +101,7 @@ class Game {
 
         // if player misses 5 times, call end game function
         if (this.missed === 5) {
-            this.endGame('lost');
+            this.gameOver('lost');
         }
     }
 
@@ -128,7 +122,7 @@ class Game {
         }
     }
 
-    endGame(wonOrLost) {
+    gameOver(wonOrLost) {
 
         // show start screen overlay
         startScreen.style.display = 'inherit';
@@ -150,7 +144,7 @@ class Game {
     resetGame() {
 
         // remove all phrase LI elements from UL
-        this.phraseObject.letterLIs.forEach(li => {
+        this.activePhrase.letterLIs.forEach(li => {
             li.remove();
         });
 

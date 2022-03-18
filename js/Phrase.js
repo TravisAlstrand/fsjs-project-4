@@ -6,10 +6,10 @@
 class Phrase {
 
     // constructor method creates the object. recieves a phrase parameter
-    constructor(phraseObject) {
+    constructor(phrase) {
 
         // sets the phrase property = to the phrase parameter converted to lower case
-        this.phrase = phraseObject.phrase.toLowerCase();
+        this.phrase = phrase.toLowerCase();
 
         this.letterLIs = [];
     }
